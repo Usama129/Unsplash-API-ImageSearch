@@ -1,32 +1,123 @@
+
 .App {
-  text-align: center;
+
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.masonry{
+    transition-duration: 1s;
+    z-index: -1;
+    margin: 50px auto;
+    width: 65%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@media only screen and (min-width: 1024px) {
+    .masonry {
+        column-count: 4;
+    }
 }
 
-.App-link {
-  color: #61dafb;
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+    .masonry {
+        column-count: 3;
+    }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.item {
+    background: none;
+    display: inline-block;
+    margin: 0 0 1em;
+    width: 100%;
+    margin: 16px;
+}
+
+.item:hover {
+    cursor: pointer;
+}
+
+.pagination {
+    font-family: "Open Sans";
+    font-weight: bolder;
+    font-style: italic;
+    position: relative;
+    background: lightgray;
+    border-radius: 10px;
+    display: inline-block;
+    left: 330px;
+    top: 45px;
+    margin: 50px auto ;
+    list-style: none;
+}
+
+.pagination > * {
+    float: left;
+    color: #050417;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination > * > a {
+    color: #050417;
+    text-decoration: none;
+}
+
+.pagination > *.active > a {
+    cursor: default;
+    color: lightblue;
+    text-decoration: none;
+}
+
+.pagination > *.active {
+    background-color: #050417;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination > *:hover:not(.active) {background-color: rosybrown; border-radius: 5px; color: white; cursor: pointer}
+
+.midModal {width: 100%; margin-top: 20px;}
+
+.download {
+    float: right;
+    width: 34%;
+    height: 45px;
+    background: #FFFFFF;
+    border: 2px solid #2A2B8D;
+    border-radius: 10px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 14px;
+    color: #2A2B8D;
+}
+.download:hover {
+    cursor: pointer;
+    background: #EEE;
+}
+
+.userdeets{
+    float: left;
+    width: 250px;
+    height: 47px;
+}
+
+.userdeets > div > p {
+    color: #2A2B8D;
+    font-weight: bold;
+}
+
+.camsettingstext {
+    color: #2A2B8D;
+    font-size: 12px;
+    width: 100px;
+}
+
+.camsettingstext:hover {
+    cursor: default;
+    color: #559BD1;
+}
+
+.property{
+    color: #2A2B8D
 }
