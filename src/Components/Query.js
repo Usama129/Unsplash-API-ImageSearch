@@ -18,7 +18,7 @@ class Query extends Component {
 
     componentDidMount() {
         //console.log("componentDidMount executing in Query.js");
-        axios.get('https://api.unsplash.com/collections/featured/?client_id=ee0cfec3935724767faea6ea67dbc7e8879dd4884d6f9b32393b95fd57372ac1')
+        axios.get('https://api.unsplash.com/collections/featured/?client_id=' + process.env.REACT_APP_CLIENT_ID)
             .then(res => {
                 this.rawdata = res.data;
                 //console.log(res.data);

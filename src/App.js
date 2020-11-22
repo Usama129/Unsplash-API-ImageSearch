@@ -18,7 +18,7 @@ class App extends Component {
         this.onCloseModal = this.onCloseModal.bind(this)
         this.getModalPhoto = this.getModalPhoto.bind(this)
         this.state = {
-            access: '/?client_id=ee0cfec3935724767faea6ea67dbc7e8879dd4884d6f9b32393b95fd57372ac1',
+            access: '/?client_id='+process.env.REACT_APP_CLIENT_ID,
             key: '',
             collection: 0,
             total: 0,
@@ -47,7 +47,7 @@ class App extends Component {
 
     getModalPhoto(id) {
         console.log("Requesting photo", id)
-        axios.get('https://api.unsplash.com/photos/'+id+'/?client_id=ee0cfec3935724767faea6ea67dbc7e8879dd4884d6f9b32393b95fd57372ac1', {
+        axios.get('https://api.unsplash.com/photos/'+id+'/?client_id='+process.env.REACT_APP_CLIENT_ID, {
             params: {
             }
         }).then(res => {
@@ -69,7 +69,7 @@ class App extends Component {
     getUserThumb(username){
         console.log("Requesting user thumb for @"+username)
         console.log(username)
-        axios.get('https://api.unsplash.com/users/'+username+'/?client_id=ee0cfec3935724767faea6ea67dbc7e8879dd4884d6f9b32393b95fd57372ac1', {
+        axios.get('https://api.unsplash.com/users/'+username+'/?client_id='+process.env.REACT_APP_CLIENT_ID, {
             params: {
             }
         }).then(res => {
@@ -82,7 +82,7 @@ class App extends Component {
 
     processRequest(key, collection, page){
         console.log("Requesting page", page, "for", key, "in", collection)
-        axios.get('https://api.unsplash.com/search/photos/?client_id=ee0cfec3935724767faea6ea67dbc7e8879dd4884d6f9b32393b95fd57372ac1', {
+        axios.get('https://api.unsplash.com/search/photos/?client_id='+process.env.REACT_APP_CLIENT_ID, {
             params: {
                 query : key,
                 collections: collection,
