@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Home from './Components/Home'
+import Home from './Home'
 import Pagination from "react-js-pagination";
 import Modal from 'react-responsive-modal';
-import './App.css';
+import '../css/App.css';
 import axios from "axios";
-import MyModal from "./Components/MyModal";
+import MyModal from "./MyModal";
 
 class App extends Component {
 
@@ -17,6 +17,7 @@ class App extends Component {
         this.onOpenModal = this.onOpenModal.bind(this)
         this.onCloseModal = this.onCloseModal.bind(this)
         this.getModalPhoto = this.getModalPhoto.bind(this)
+
         this.state = {
             access: '/?client_id='+process.env.REACT_APP_CLIENT_ID,
             key: '',
@@ -35,7 +36,6 @@ class App extends Component {
     }
 
     onOpenModal() {
-        console.log("Opening modal")
         this.setState({ open: true });
 
     };
@@ -46,19 +46,17 @@ class App extends Component {
     };
 
     getModalPhoto(id) {
-        console.log("Requesting photo", id)
         axios.get('https://api.unsplash.com/photos/'+id+'/?client_id='+process.env.REACT_APP_CLIENT_ID, {
             params: {
             }
         }).then(res => {
-            console.log(res.data)
             this.setState({ opendata: res.data})
             this.getUserThumb(res.data.user.username)
             this.onOpenModal()
         }).catch(err => {
             if (err.toString().includes("403"))
                 this.setState({ratelimit: true})
-            console.log('Error while fetching photo', err);
+            //console.log('Error while fetching photo', err);
         });
     }
 
@@ -67,21 +65,18 @@ class App extends Component {
     }
 
     getUserThumb(username){
-        console.log("Requesting user thumb for @"+username)
-        console.log(username)
         axios.get('https://api.unsplash.com/users/'+username+'/?client_id='+process.env.REACT_APP_CLIENT_ID, {
             params: {
             }
         }).then(res => {
-            console.log(res.data)
             this.setState({userthumburls: res.data.profile_image})
         }).catch(err => {
-            console.log('Error while fetching user thumb', err);
+            //console.log('Error while fetching user thumb', err);
         });
     }
 
     processRequest(key, collection, page){
-        console.log("Requesting page", page, "for", key, "in", collection)
+
         axios.get('https://api.unsplash.com/search/photos/?client_id='+process.env.REACT_APP_CLIENT_ID, {
             params: {
                 query : key,
@@ -90,13 +85,13 @@ class App extends Component {
                 page: page
             }
         }).then(res => {
-            console.log(res.data)
+
             this.setState({total: res.data.total})
             this.postSearch(key, res.data, collection)
         }).catch(err => {
             if (err.toString().includes("403"))
                 this.setState({ratelimit: true})
-            console.log('Error while fetching photos', err);
+            //console.log('Error while fetching photos', err);
         });
     }
 
@@ -112,7 +107,7 @@ class App extends Component {
 
         myImages = d.results
         this.setState({imgs : myImages, searchPerformed: true});
-        console.log(myImages)
+
         if(myImages.length === 0) {
             m = 'No results for '+key;
             if (col !== null)
@@ -125,8 +120,11 @@ class App extends Component {
 
     handlePageChange(pageNumber) {
         this.mypage = pageNumber;
-        console.log('clicked', pageNumber)
         this.processRequest(this.mysearch, this.mycollection, pageNumber)
+    }
+
+    goHome = () => {
+        this.setState({searchPerformed: false})
     }
 
     render() {
@@ -135,7 +133,7 @@ class App extends Component {
         let dynamicPagination, noResults, dynamicMasonry;
 
         if (this.state.searchPerformed) {
-            console.log(this.state.noResults)
+
             noResults = {
                 display: 'none'
             }
@@ -160,7 +158,8 @@ class App extends Component {
 
     return (
         <div>
-            <Home request={this.setRequest.bind(this)} searchPerformed={this.state.searchPerformed} />
+            <Home request={this.setRequest.bind(this)} searchPerformed={this.state.searchPerformed}
+                goHome={this.goHome}/>
 
             <div className="masonry" style={dynamicMasonry}>
                 {this.state.imgs.map(function(element){

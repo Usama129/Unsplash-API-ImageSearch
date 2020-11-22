@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import './CustomSelect.css'
+import '../css/CustomSelect.css'
 
 class CustomSelect extends Component {
 
@@ -9,7 +9,6 @@ class CustomSelect extends Component {
     }
 
     handleChange(event) {
-        console.log("Sending from CustomSelect.js - ", event.target.value);
         this.props.change(event.target.value);
     }
 

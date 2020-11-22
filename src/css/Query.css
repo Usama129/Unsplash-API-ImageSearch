@@ -30,4 +30,10 @@
     letter-spacing: 0.1em;
     font-weight: bold;
     color: #FFFFFF;
+    outline: none !important;
+
+}
+
+.sBtn:hover {
+    cursor : pointer;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './Query.css'
+import '../css/Query.css'
 import CustomSelect from "./CustomSelect";
 
 class Query extends Component {
@@ -10,6 +10,7 @@ class Query extends Component {
 
     constructor(){
         super();
+
         this.state = {
             query:{},
             collections: []
@@ -29,13 +30,12 @@ class Query extends Component {
                 //console.log(collections);
                 this.setState({ collections: collections });
             }).catch(err => {
-            console.log('Error happened while fetching collections', err);
+            //console.log('Error happened while fetching collections', err);
         });
     }
 
     getCollectionID(col) {
         let ID;
-        console.log("Received in Query.js - ",col)
         this.rawdata.forEach(function(element) {
             if (element.title === col)
                 ID = element.id;
@@ -44,7 +44,6 @@ class Query extends Component {
     }
 
     handleSubmit(e){
-        console.log("Sending from Query.js - ",this.col,this.refs.searchbox.value);
         if (this.refs.searchbox.value !== '') {
             this.setState({query:{
                 searchkey: this.refs.searchbox.value,
@@ -64,7 +63,6 @@ class Query extends Component {
             dynamicSearchbox = { top: '35px', left: '206px' }
             dynamicButton = { top: '36px', left: '1065px' }
         }
-
         return (
             <form onSubmit={this.handleSubmit.bind(this)}>
                 <input className="searchbox" type="text" ref="searchbox" placeholder="Query" style={dynamicSearchbox}/>

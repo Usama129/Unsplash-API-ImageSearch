@@ -7,6 +7,10 @@
     top: 120px;
 }
 
+.Logo:hover{
+    cursor: pointer;
+}
+
 .MyLogo {
     position: absolute;
     left: 40.85%;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import logorec from "../logorec.svg";
-import logo from "../logo.svg";
-import './Home.css'
+import logorec from "../img/logorec.svg";
+import logo from "../img/logo.svg";
+import '../css/Home.css'
 import Query from "./Query";
 
 class Home extends Component {
@@ -16,8 +16,11 @@ class Home extends Component {
     }
 
     handleSearch(newquery){
-        console.log("Sending from Home.js -", newquery.collection, newquery.searchkey)
         this.props.request(newquery.searchkey, newquery.collection)
+    }
+
+    logoClick = () => {
+        this.props.goHome()
     }
 
     render () {
@@ -36,8 +39,8 @@ class Home extends Component {
         return(
             <div className="workblock" style={dynamicWorkblock}>
                 <div className="Logo" style={dynamicLogo}>
-                    <img src={logorec} className="LogoRectangle" alt="My Rec" />
-                    <img src={logo} className="MyLogo" alt="My Logo"/>
+                    <img src={logorec} className="LogoRectangle" alt="My Rec" onClick={this.logoClick} />
+                    <img src={logo} className="MyLogo" alt="My Logo" onClick={this.logoClick}/>
                     <h4 className="title" style={dynamicTitle} ><strong>image</strong> search</h4>
                 </div>
                 <Query className="q" performSearch={this.handleSearch.bind(this)} searchPerformed={this.props.searchPerformed} />
